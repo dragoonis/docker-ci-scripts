@@ -2,7 +2,7 @@ version: '2'
 
 services:
     application:
-        image: registry.com/pplweb:%BUILD_TAG%
+        image: my-registry.com/pplweb:%BUILD_TAG%
         environment:
             SYMFONY_ENVIRONMENT: test
         working_dir: /var/www
