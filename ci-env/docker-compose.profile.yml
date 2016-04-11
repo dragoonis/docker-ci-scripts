@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+    application:
+        environment:
+            - SYMFONY_ENVIRONMENT=test
+            - BLACKFIRE_CLIENT_ID
+            - BLACKFIRE_CLIENT_TOKEN
+
+    blackfire:
+        extends:
+            file: docker-compose.base.yml
+            service: blackfire

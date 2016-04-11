@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+    application:
+        environment:
+            SYMFONY_ENVIRONMENT: test
+        volumes:
+            - ./opt/php/test/conf.d/enable_ext_opcache.ini:/usr/local/etc/php/conf.d/enable_ext_opcache.ini
+        volumes_from:
+            - screenshots
+
+    screenshots:
+        image: busybox
+        command: chown www-data:www-data -R /var/www/web/screenshots
+        volumes:
+            - /var/www/web/screenshots
+
+#    selenium:
+#        image: selenium/standalone-firefox-debug:2.52.0
+#        environment:
+#            - SCREEN_WIDTH=1920
+#            - SCREEN_HEIGHT=1480
+#        ports:
+#            - "4444:4444"
+#            - "5900:5900"
+
+    phantomjs:
+        image: cmfatih/phantomjs
+        ports:
+            - 8910
+        entrypoint: phantomjs
+        command: "--webdriver=8910"
