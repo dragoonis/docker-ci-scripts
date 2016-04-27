@@ -4,7 +4,7 @@ mkdir -p /var/deploys/${BUILD_NUMBER}
 cd /var/deploys/${BUILD_NUMBER}
 
 # get ID of container
-id=$(docker create my-registry.com/pplweb:${BUILD_NUMBER})
+id=$(docker create my-registry.com/someproject:${BUILD_NUMBER})
 
 # copy pre-baked files out of container to disk
 docker cp $id:/var/www/docker-compose.preview.yml ./docker-compose.preview.yml
