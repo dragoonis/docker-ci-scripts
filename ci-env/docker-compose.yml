@@ -4,7 +4,6 @@ services:
 
     application:
         build: .
-        working_dir: /var/www
         ports:
             - 80:80
         volumes:
@@ -12,7 +11,6 @@ services:
             - ./opt/php/dev/php.ini:/usr/local/etc/php/php.ini
             - ./opt/nginx/dev/default.conf:/etc/nginx/conf.d/default.conf
             - .:/var/www
-
 
     cache_and_logs:
         extends:
@@ -28,8 +26,6 @@ services:
         extends:
             file: docker-compose.base.yml
             service: elasticsearch
-        volumes_from:
-            - cache_and_logs
 
     redis:
         extends:

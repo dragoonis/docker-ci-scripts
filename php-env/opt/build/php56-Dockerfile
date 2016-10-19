@@ -1,0 +1,10 @@
+FROM php:5.6-cli
+
+WORKDIR /var/www
+
+ADD opt/php/prod/conf.d /usr/local/etc/php/conf.d
+ADD opt/php/prod/php.ini /usr/local/etc/php/php.ini
+
+ADD . /var/www
+
+ENTRYPOINT /usr/local/sbin/php

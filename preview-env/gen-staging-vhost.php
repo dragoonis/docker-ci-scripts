@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-$stagingHostFormat = '%s.cs-testing-dv.uk.company.com';
+$stagingHostFormat = '%s.preview-server.com';
 $map = json_decode(shell_exec('php ' . __DIR__ . '/get-tag-to-ports-map.php'), true);
 $hostsPortMap = '';
 foreach($map as $branch => $portNum) {

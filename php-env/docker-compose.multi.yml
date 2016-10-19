@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+
+    application_7:
+        build:
+            context: .
+            dockerfile: Dockerfile7
+        ports:
+            - 8888:80
+        volumes:
+            - ./opt/php/dev/conf.d:/usr/local/etc/php/conf.d
+            - ./opt/php/dev/php.ini:/usr/local/etc/php/php.ini
+            - ./opt/nginx/dev/default.conf:/etc/nginx/conf.d/default.conf
+            - .:/var/www
+        depends_on:
+            - redis
+
+    application_56:
+        build: .
+        ports:
+            - 80:80
+        volumes:
+            - ./opt/php/dev/conf.d:/usr/local/etc/php/conf.d
+            - ./opt/php/dev/php.ini:/usr/local/etc/php/php.ini
+            - ./opt/nginx/dev/default.conf:/etc/nginx/conf.d/default.conf
+            - .:/var/www
+        depends_on:
+            - redis_7
+
+    redis:
+        image: redis
+
+    redis_7:
+        image: redis

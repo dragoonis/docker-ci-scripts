@@ -8,10 +8,9 @@ volumes:
 
 services:
     application:
-        image: my-registry.com/pplweb:%BUILD_TAG%
+        image: my-registry.com/myapp:%BUILD_TAG%
         environment:
             SYMFONY_ENVIRONMENT: test
-        working_dir: /var/www
         entrypoint: ./opt/deployment/test/start.sh
         ports:
             - 80
@@ -48,8 +47,6 @@ services:
         ports:
             - 80
             - 9200
-        volumes_from:
-            - cache_and_logs
 
     redis:
         extends:

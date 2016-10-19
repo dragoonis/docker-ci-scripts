@@ -4,7 +4,7 @@ mkdir -p /var/deploys/${BUILD_NUMBER}
 cd /var/deploys/${BUILD_NUMBER}
 
 # get ID of container
-id=$(docker create my-registry.com/someproject:${BUILD_NUMBER})
+id=$(docker create my-registry.com/myapp:${BUILD_NUMBER})
 
 # copy pre-baked files out of container to disk
 docker cp $id:/var/www/docker-compose.preview.yml ./docker-compose.preview.yml
@@ -19,7 +19,7 @@ docker-compose -f docker-compose.preview.yml up -d
 bash -c 'docker-compose -f docker-compose.preview.yml logs application | { sed "/fpm is running/ q" && kill -PIPE $$ ; }' > /dev/null 2>&1
 
 # generate the new vhost and spin up the containers
-(cd ~/pplwebsite-preview-scripts; bin/gen-staging-vhost.php; /usr/local/bin/docker-compose down; /usr/local/bin/docker-compose up -d)
+(cd ~/pplwebsite-preview-scripts; bin/gen-staging-vhost.php; docker-compose down; docker-compose up -d)
 
 # get port number for this container
 port=`/usr/local/bin/docker-compose -f docker-compose.preview.yml ps | grep application | grep -Po ':\d+-' | sed 's/://' | sed 's/-//'`
